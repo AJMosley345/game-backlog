@@ -1,34 +1,29 @@
-import { useState, useEffect } from 'react';
-import { Container, Grid, Paper, TextField, Button, Typography, Stack } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState } from 'react';
+import Router from 'next/router';
+import { TextField, Button, Stack } from '@mui/material';
+import Layout from '../components/Layout';
 
-export default function Create() {
+const NewGame: React.FC = () => {
     const[name, setName] = useState('');
     const[platform, setPlatform] = useState('');
     const[series, setSeries] = useState('');
 
-    async function handleSubmit(e) {
+    const submitData = async (e:React.SyntheticEvent) => {
         e.preventDefault();
     
-        const res = await fetch("/api/create", {
+        const res = await fetch("/api/games/create", {
           method: "POST",
           body: JSON.stringify({ name, platform, series }),
           headers: {
             "Content-Type": "application/json",
           },
-          method: "POST",
         });
-    
         if (res.ok) {
-          setName("");
-          setPlatform("");
-          setSeries("");
-          alert("Game added successfully!");
-        } else {
-          alert("There was an error adding the game.");
-        }
+            setName("");
+            setPlatform("");
+            setSeries("");
+          }
     }
-
     return (
         <Layout>
             <Stack width={250} spacing={3}>
@@ -53,10 +48,12 @@ export default function Create() {
                     placeholder="Series"
                     sx={{ backgroundColor: "white"}}
                 />
-                <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
+                <Button type="submit" variant="contained" color="primary" onClick={submitData}>
                     Add Game
                 </Button>
+                <Button href='#' variant="contained" color="primary" onClick={() => Router.push('/')}>Cancel</Button>
             </Stack>
         </Layout>
-    );
+    )
 }
+export default NewGame

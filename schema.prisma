@@ -9,7 +9,7 @@ datasource db {
 }
 
 model games {
-  id       Int   @id @default(autoincrement()) @db.Int
+  id       String   @default(cuid()) @id
   name     String? @db.VarChar(255)
   platform String? @db.VarChar(255)
   series   String? @db.VarChar(255)

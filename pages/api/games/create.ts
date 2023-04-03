@@ -1,17 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../lib/prisma";
 
-const prisma = new PrismaClient();
 
 export default async function create(req, res){
     const { name, platform, series } = req.body;
     
     const result = await prisma.games.create({
         data: {
-            name,
-            platform,
-            series
+            name: name,
+            platform: platform,
+            series: series
         },
     });
-
     res.json(result);
 }

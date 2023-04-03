@@ -1,6 +1,5 @@
-const mysql = require('mysql2')
+const mysql = require('mysql2/promise')
 // require('dotenv').config();
 const connectionString = 'mysql://lo3whoexjtm6mvkm7jh2:pscale_pw_JW6rTc5HLCCRmWXgdOPcZQBMlDNVQFcKQYUSbJC0pPz@us-east.connect.psdb.cloud/game-backlog?ssl={"rejectUnauthorized":true}'
-const connection = mysql.createConnection(connectionString)
-connection.connect();
+const connection = mysql.createConnection(connectionString);
 export default connection;

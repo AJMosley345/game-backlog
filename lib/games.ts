@@ -1,6 +1,13 @@
 import db from './db';
 
-export function getAllGames() {
+interface Game {
+  id: number;
+  name: string;
+  platform: string;
+  series: string;
+}
+
+export function getAllGames(): Promise<Game[]> {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM games', (error, results) => {
       if (error) {
@@ -12,7 +19,7 @@ export function getAllGames() {
   });
 }
 
-export function getGameById(id) {
+export function getGameById(id: number): Promise<Game> {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM games WHERE id = ?', [id], (error, results) => {
       if (error) {
@@ -24,9 +31,9 @@ export function getGameById(id) {
   });
 }
 
-export function addGame(name, email, phone) {
+export function addGame(name: string, platform: string, series: string): Promise<number> {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO games (name, email, phone) VALUES (?, ?, ?)', [name, email, phone], (error, results) => {
+    db.query('INSERT INTO games (name, platform, series) VALUES (?, ?, ?)', [name, platform, series], (error, results) => {
       if (error) {
         reject(error);
       } else {
@@ -36,9 +43,9 @@ export function addGame(name, email, phone) {
   });
 }
 
-export function updateGame(id, name, email, phone) {
+export function updateGame(id: number, name: string, platform: string, series: string): Promise<number> {
   return new Promise((resolve, reject) => {
-    db.query('UPDATE games SET name = ?, email = ?, phone = ? WHERE id = ?', [name, email, phone, id], (error, results) => {
+    db.query('UPDATE games SET name = ?, platform = ?, series = ? WHERE id = ?', [name, platform, series, id], (error, results) => {
       if (error) {
         reject(error);
       } else {
@@ -48,7 +55,7 @@ export function updateGame(id, name, email, phone) {
   });
 }
 
-export function deleteGame(id) {
+export function deleteGame(id: number): Promise<number> {
   return new Promise((resolve, reject) => {
     db.query('DELETE FROM games WHERE id = ?', [id], (error, results) => {
       if (error) {
