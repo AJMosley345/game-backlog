@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import { TextField, Button, Stack } from '@mui/material';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 
 const NewGame: React.FC = () => {
     const[name, setName] = useState('');

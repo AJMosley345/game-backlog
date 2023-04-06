@@ -1,8 +1,8 @@
-import prisma from '../lib/prisma';
+import prisma from '../../lib/prisma';
 import { GetStaticProps } from 'next';
-import GameList, { ListProps } from '../components/GameList';
+import GameList, { ListProps } from '../../components/GameList';
 import React from 'react';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 import { Divider, Grid, Stack } from '@mui/material';
 
 export const getStaticProps: GetStaticProps = async () => {

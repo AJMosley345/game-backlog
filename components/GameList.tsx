@@ -3,7 +3,7 @@ import Router from "next/router";
 import { Button, Typography, Divider, Container } from '@mui/material';
 
 export type ListProps = {
-    id: number;
+    id: string;
     name: string;
     platform: string;
     series: string;
