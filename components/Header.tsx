@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Typography } from "@mui/material";
+import { Box, Typography, AppBar, Toolbar, MenuItem } from "@mui/material";
 
 const Header: React.FC = () => {
     const router = useRouter();
@@ -27,10 +27,22 @@ const Header: React.FC = () => {
     );
 
     return(
-        <nav>
-            {home}
-            {addGame}
-        </nav>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar variant="dense">
+                <Link href="/" style={{ textDecoration: 'none' }}>
+                        <MenuItem>
+                            Home
+                        </MenuItem>
+                    </Link>                    
+                    <Link href="/add_game" style={{ textDecoration: 'none' }}>
+                        <MenuItem>
+                            Add Game
+                        </MenuItem>
+                    </Link>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
 
 }

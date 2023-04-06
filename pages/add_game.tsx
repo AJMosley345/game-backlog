@@ -26,7 +26,7 @@ const NewGame: React.FC = () => {
     }
     return (
         <Layout>
-            <Stack width={250} spacing={3}>
+            <Stack width={250} spacing={3} mx={3} my={3}>
                 <TextField
                     type="text"
                     value={name}

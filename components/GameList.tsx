@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import { Button, Typography, Divider } from '@mui/material';
+import { Button, Typography, Divider, Container } from '@mui/material';
 
 export type ListProps = {
     id: number;
@@ -11,32 +11,36 @@ export type ListProps = {
 
 const GameList: React.FC<{ game: ListProps }> = ({ game }) => {
     return (
-        <div className="container">
-            <div >
-                <div className="row">
-                    <div className="col-md-9">
-                        <div className="mb-3">
-                                <div className="d-flex align-content-start flex-row">
-                                    <div className="d-flex flex-column flex-md-row justify-content-between flex-grow-1 mb-2">
-                                        <div className="mr-4">
-                                        <div>
-                                            <Typography>{game.name}</Typography>
-                                            <Typography>
-                                                {game.platform}
-                                            </Typography>
-                                            <Typography>
-                                                {game.series}
-                                            </Typography>
-                                            <Button variant="contained" onClick={() => Router.push("/game/[id]", `/game/${game.id}`)}>Details</Button>
-                                        </div>
+        <Container>
+            <div className="row">
+                <div className="col-md-9">
+                    <div className="mb-3">
+                            <div className="d-flex align-content-start flex-row">
+                                <div className="d-flex flex-column flex-md-row justify-content-between flex-grow-1 mb-2">
+                                    <div className="mr-4">
+                                    <div>
+                                        <Typography>{game.name}</Typography>
+                                        <Typography>
+                                            {game.platform}
+                                        </Typography>
+                                        <Typography>
+                                            {game.series}
+                                        </Typography>
+                                        <Button
+                                            sx={{ mb: 1}}
+                                            variant="contained" 
+                                            onClick={() => Router.push("/game/[id]", `/game/${game.id}`)}
+                                        >
+                                            Details
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <Divider />
             </div>
+            <Divider />
             <style jsx>{`
                 .row {
                     display: flex;
@@ -58,7 +62,7 @@ const GameList: React.FC<{ game: ListProps }> = ({ game }) => {
                     margin-left: auto;
                 }
             `}</style>
-        </div>
+        </Container>
     );
 };
 
