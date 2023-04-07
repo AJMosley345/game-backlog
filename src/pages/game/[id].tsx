@@ -1,9 +1,9 @@
-import prisma from "../../../lib/prisma";
+import prisma from "../../lib/prisma";
 import { GetServerSideProps } from "next";
 import React from "react";
 import Router  from "next/router";
-import { ListProps } from "../../../components/GameList";
-import Layout from "../../../components/Layout";
+import { ListProps } from "../../components/GameList";
+import Layout from "../../components/Layout";
 import { Button } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
