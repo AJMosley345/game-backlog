@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import { Button, Typography, Divider, Container } from '@mui/material';
+import { Button, Typography, Box } from '@mui/material';
 
 export type ListProps = {
     id: string;
@@ -11,58 +11,30 @@ export type ListProps = {
 
 const GameList: React.FC<{ game: ListProps }> = ({ game }) => {
     return (
-        <Container>
-            <div className="row">
-                <div className="col-md-9">
-                    <div className="mb-3">
-                            <div className="d-flex align-content-start flex-row">
-                                <div className="d-flex flex-column flex-md-row justify-content-between flex-grow-1 mb-2">
-                                    <div className="mr-4">
-                                    <div>
-                                        <Typography>{game.name}</Typography>
-                                        <Typography>
-                                            {game.platform}
-                                        </Typography>
-                                        <Typography>
-                                            {game.series}
-                                        </Typography>
-                                        <Button
-                                            sx={{ mb: 1}}
-                                            variant="contained" 
-                                            onClick={() => Router.push("/game/[id]", `/game/${game.id}`)}
-                                        >
-                                            Details
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Divider />
-            <style jsx>{`
-                .row {
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin-right: -15px;
-                    margin-left: -15px;
-                }
-                .col-md-9 {
-                    position: relative;
-                    width: 100%;
-                    padding-right: 15px;
-                    padding-left: 15px;
-                }
-                .container {
-                    width: 100%;
-                    padding-right: 15px;
-                    padding-left: 15px;
-                    margin-right: auto;
-                    margin-left: auto;
-                }
-            `}</style>
-        </Container>
+        <>
+            <Box sx={{ mx: 2, width:250, border: 1, borderRadius: '10px', mb: 2 }}>
+                <Box sx={{ ml: 2 }}>
+                    <Typography variant="h6">
+                        {game.name}
+                    </Typography>
+
+                    <Typography variant="subtitle2">
+                        {game.platform}
+                    </Typography>
+
+                    <Typography variant="subtitle2">
+                        {game.series}
+                    </Typography>
+                    <Button
+                        sx={{ backgroundColor: "#16123f", mb: 1}}
+                        variant="contained" 
+                        onClick={() => Router.push("/game/[id]", `/game/${game.id}`)}
+                    >
+                        Details
+                    </Button>
+                </Box>
+            </Box>
+        </>
     );
 };
 

@@ -1,50 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Box, Typography, AppBar, Toolbar, MenuItem } from "@mui/material";
+import { Box, AppBar, Toolbar, MenuItem } from "@mui/material";
+import SearchBox from "./SearchBox";
 
-const Header: React.FC = () => {
+// interfaces for the Search function
+interface Props {
+    onSearch: (query: string) => void;
+}
+
+const Header: React.FC = ( { onSearch }: Props ) => {
     const router = useRouter();
-
-    let home = (
-        <div>
-            <Link href="/">
-                <Typography>
-                    Home
-                </Typography>
-            </Link>
-        </div>
-    );
-
-    let addGame = (
-        <div>
-            <Link href="/add_game">
-                <Typography>
-                    Add Game
-                </Typography>
-            </Link>
-        </div>
-    );
-
     return(
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar sx={{ position: "static", background: "#abd699"}}>
                 <Toolbar variant="dense">
-                <Link href="/" style={{ textDecoration: 'none' }}>
+                <Link href="/" style={{ textDecoration: 'none', color: "#16123f" }}>
                         <MenuItem>
                             Home
                         </MenuItem>
                     </Link>                    
-                    <Link href="/add_game" style={{ textDecoration: 'none' }}>
+                    <Link href="/addGame" style={{ textDecoration: 'none', color: "#16123f" }}>
                         <MenuItem>
                             Add Game
                         </MenuItem>
                     </Link>
+                    <SearchBox onSearch={onSearch}/>
                 </Toolbar>
             </AppBar>
         </Box>
     );
-
 }
 
 export default Header;

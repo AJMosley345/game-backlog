@@ -1,5 +1,5 @@
-import prisma from "../../../lib/prisma";
-
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
 
 export default async function create(req, res){
     const { name, platform, series } = req.body;

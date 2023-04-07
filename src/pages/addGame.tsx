@@ -48,10 +48,10 @@ const NewGame: React.FC = () => {
                     placeholder="Series"
                     sx={{ backgroundColor: "white"}}
                 />
-                <Button type="submit" variant="contained" color="primary" onClick={submitData}>
+                <Button sx={{ backgroundColor: "#16123f"}} type="submit" variant="contained" onClick={submitData}>
                     Add Game
                 </Button>
-                <Button href='#' variant="contained" color="primary" onClick={() => Router.push('/')}>Cancel</Button>
+                <Button sx={{ backgroundColor: "#16123f"}} href='#' variant="contained" color="primary" onClick={() => Router.push('/')}>Cancel</Button>
             </Stack>
         </Layout>
     )

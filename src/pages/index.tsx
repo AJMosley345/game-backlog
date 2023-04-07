@@ -1,10 +1,12 @@
-import prisma from '../lib/prisma';
 import { GetStaticProps } from 'next';
 import GameList, { ListProps } from '../components/GameList';
-import React from 'react';
+import SearchBox from '../components/SearchBox';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import { Divider, Grid, Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import { PrismaClient } from '@prisma/client'
 
+const prisma = new PrismaClient()
 export const getStaticProps: GetStaticProps = async () => {
   const gameList = await prisma.games.findMany();
   return {
@@ -16,17 +18,42 @@ export const getStaticProps: GetStaticProps = async () => {
 type Props = {
   gameList: ListProps[]
 }
-
+interface Game {
+  id: string;
+  name: string;
+  platform: string;
+  series: string;
+}
+interface SearchResult {
+  games: Game[];
+}
 const Backlog: React.FC<Props> = (props) => {
+  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+
+  const handleSearch = async (query: string) => {
+    if (!query){
+      setSearchResult(null);
+      return;
+    }
+    const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+    const result = await res.json();
+    setSearchResult(result);        
+  };
   return (
     <Layout>
-      <h1>Game Backlog</h1>
-      <Stack spacing={2}>
-        {props.gameList.map((game) => (
-          <div key={game.id}>
-            <GameList game={game} />
-          </div>
-        ))}
+      <Typography variant="h3">Game Backlog</Typography>
+      <Stack direction="row" sx={{ flexWrap: "wrap"}}>
+        {searchResult
+          ? searchResult.games.map((game) => (
+            <div key={game.id}>
+              <GameList game={game} />
+            </div>
+          ))
+          : props.gameList.map((game) => (
+            <div key={game.id}>
+              <GameList game={game} />
+            </div>
+          ))}
       </Stack>
      </Layout>
   )
