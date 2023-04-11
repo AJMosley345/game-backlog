@@ -1,9 +1,9 @@
-import prisma from "../../lib/prisma";
-import { GetServerSideProps } from "next";
 import React from "react";
 import Router  from "next/router";
-import { ListProps } from "../../components/GameList";
 import Layout from "../../components/Layout";
+import { ListProps } from "../../components/GameList";
+import { prisma } from "../../lib/db";
+import { GetServerSideProps } from "next";
 import { Button, Stack, Typography } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 async function deleteGame(id: String): Promise<void> {
-    await fetch(`/api/games/${id}`, {
+    await fetch(`/api/games/delete/${id}`, {
         method: 'DELETE',
       });
     await Router.push("/");

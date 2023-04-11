@@ -4,9 +4,8 @@ import SearchBox from '../components/SearchBox';
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { Stack, Typography } from '@mui/material';
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../lib/db';
 
-const prisma = new PrismaClient()
 export const getStaticProps: GetStaticProps = async () => {
   const gameList = await prisma.games.findMany();
   return {
