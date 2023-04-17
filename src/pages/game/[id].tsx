@@ -28,13 +28,11 @@ const GameInfo: React.FC<ListProps> = (props) => {
     let name = props.name;
     let platform = props.platform;
     let series = props.series;
-    let gameId = props.id;
     
     return (
         <Layout>
             <Stack mt={2} spacing={1}>
                 <Typography variant="h4"> Game Details</Typography>
-                <Typography variant="h5"> Game ID: {gameId}</Typography>
                 <Typography variant="h5">Title: {name}</Typography>
                 <Typography variant="h5">Platform: {platform}</Typography>
                 <Typography variant="h5">Series: {series}</Typography>

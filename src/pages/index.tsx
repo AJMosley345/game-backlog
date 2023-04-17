@@ -1,10 +1,10 @@
 import { GetStaticProps } from 'next';
 import GameList, { ListProps } from '../components/GameList';
-import SearchBox from '../components/SearchBox';
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Button, TextField, Select, MenuItem, FormControl } from '@mui/material';
 import { prisma } from '../lib/db';
+import { Game } from 'interfaces/Game';
 
 export const getStaticProps: GetStaticProps = async () => {
   const gameList = await prisma.games.findMany();
@@ -17,18 +17,28 @@ export const getStaticProps: GetStaticProps = async () => {
 type Props = {
   gameList: ListProps[]
 }
-interface Game {
-  id: string;
-  name: string;
-  platform: string;
-  series: string;
-}
+
 interface SearchResult {
   games: Game[];
 }
-const Backlog: React.FC<Props> = (props) => {
-  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
 
+const Backlog: React.FC<Props> = (props) => {
+  // variable and function to handle sorting by different criteria
+  // const [sortOption, setSortOption] = useState('name');
+  // const [games, setGames] = useState(props.gameList);
+
+  // const handleSortOptionChange = (event) => {
+  //   setSortOption(event.target.value);
+  // };
+
+  // const handleSort = async () => {
+  //   const res = await fetch(`/api/sortGames?sortOptions=${sortOption}`);
+  //   const sortedItems = await res.json();
+  //   setGames(sortedItems);
+  // };
+
+  // variable and function to handle searching by title
+  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const handleSearch = async (query: string) => {
     if (!query){
       setSearchResult(null);
@@ -38,8 +48,23 @@ const Backlog: React.FC<Props> = (props) => {
     const result = await res.json();
     setSearchResult(result);        
   };
+
   return (
     <Layout>
+      <>
+        <TextField
+                  label='Search by Title'
+                  onChange={(event) => handleSearch(event.target.value)} 
+        />
+        {/* <FormControl>
+          <Select value={sortOption} onChange={handleSortOptionChange}>
+            <MenuItem value='name'>Title</MenuItem>
+            <MenuItem value='platform'>Platform</MenuItem>
+            <MenuItem value='series'>Series</MenuItem>
+          </Select>
+          <Button onClick={handleSort}>Sort</Button>
+        </FormControl> */}
+      </>
       <Typography variant="h3">Game Backlog</Typography>
       <Stack direction="row" sx={{ flexWrap: "wrap"}}>
         {searchResult

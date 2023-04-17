@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider     = "mysql"
-  url          = "mysql://lk4glriovw5kcyc08i8s:pscale_pw_1hKtqkQrZlYFjLfLc2yJza9vvLtVScA1Tdkglywbfh7@aws.connect.psdb.cloud/game-backlog?sslaccept=strict"
+  url          = env("DEV_DATABASE_URL")
   relationMode = "prisma"
 }
 

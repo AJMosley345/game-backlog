@@ -7,7 +7,9 @@ export default async function create(req, res){
         data: {
             name: name,
             platform: platform,
-            series: series
+            series: series,
+            createdAt: new Date(),
+            updatedAt: new Date()
         },
     });
     res.json(result);

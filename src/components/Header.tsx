@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Box, AppBar, Toolbar, MenuItem } from "@mui/material";
-import SearchBox from "./SearchBox";
 
 // interfaces for the Search function
 interface Props {
@@ -25,7 +24,6 @@ const Header: React.FC = ( { onSearch }: Props ) => {
                             Add Game
                         </MenuItem>
                     </Link>
-                    <SearchBox onSearch={onSearch}/>
                 </Toolbar>
             </AppBar>
         </Box>
