@@ -8,8 +8,6 @@ export default async function create(req, res){
             name: name,
             platform: platform,
             series: series,
-            createdAt: new Date(),
-            updatedAt: new Date()
         },
     });
     res.json(result);
